@@ -1,0 +1,52 @@
+<ion-nav-view name="Ongoing">
+  <div id="top-arrow" ng-show="showTopArrow" ng-click="scrollTop()">
+    <i class="ion-arrow-up-c"></i>
+  </div>
+  <ion-content id="ongoing" on-scroll="getScrollPosition()">
+    <!-- Ongoing tab -->
+    <ion-tabs class="ongoing-tabs">
+      <ion-tab title="Ongoing">
+        <ion-nav-view id="ongoing-tab" name="ongoingList">
+            <div class="list card">
+              <a class="item message-item" ng-repeat="ongoing in ongoingItems track by $index" ng-click="viewOngoing()">
+                <span class="title">{{ongoing.title}}</span>
+                <span class="desc">{{ongoing.shortDescription | limitToWords:true:60 }}</span>
+                <div class="subinfo">
+                  <span class="category">{{ongoing.category}}</span>
+                  <span class="user">{{ongoing.userId}}</span>
+                  <span class="region">{{ongoing.region}}</span>
+                  <span class="price">${{ongoing.price}}</span>
+                </div>
+                <div class="actions">
+                  <button class="started">Started {{ongoing.started }}</button>
+                  <button class="ended">Ending {{ongoing.ending }}</button>
+                </div>
+                <i class="ion-ios-arrow-forward chevron"></i>
+              </a>
+            </div>
+        </ion-nav-view>
+      </ion-tab>
+      <!-- Upcoming tab -->
+      <ion-tab title="Upcoming">
+        <ion-nav-view id="upcoming-tab" name="upcomingList">
+            <div class="list card">
+              <a class="item message-item" ng-repeat="upcoming in upcomingItems track by $index" ng-click="viewUpcoming()">
+                <span class="title">{{upcoming.title}}</span>
+                <span class="desc">{{upcoming.shortDescription}}</span>
+                <div class="subinfo">
+                  <span class="category">{{upcoming.category}}</span>
+                  <span class="user">{{upcoming.id}}</span>
+                  <span class="region">{{upcoming.region}}</span>
+                  <span class="price">${{upcoming.price}}</span>
+                </div>
+                <div class="actions">
+                  <button class="started">Starting {{upcoming.starting }}</button>
+                </div>
+                <i class="ion-ios-arrow-forward chevron"></i>
+              </a>
+            </div>
+        </ion-nav-view>
+      </ion-tab>
+    </ion-tabs>
+  </ion-content>
+</ion-nav-view>

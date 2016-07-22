@@ -1,0 +1,30 @@
+<ion-nav-view name="Login">
+  <ion-content id="login">
+    <div class="wrapper">
+      <form class="inner" name="loginForm">
+        <div class="list login-inputs" ng-show="platformReady">
+          <ion-item id="username" ng-class="{ 'api-error': error.username==true }" ng-click="reset()">
+            <i class="ion-ios-email-outline"></i>
+            <input type="text" placeholder="Username" name="user" ng-model="creds.user"></input>
+            <span class="error" ng-show="error.username==true">Username not found.</span>
+          </ion-item>
+          <ion-item id="password" ng-class="{ 'api-error': error.password==true }" ng-click="reset()">
+            <i class="ion-ios-locked-outline"></i>
+            <input type="password" placeholder="Password" name="pass" ng-model="creds.pass"></input>
+            <span class="error" ng-show="error.password==true">Invalid password or account disabled.</span>
+          </ion-item>
+        </div>
+        <div class="login-buttons" ng-show="platformReady">
+          <div>
+              <button ng-click="login(creds.user, creds.pass)" class="button button-full button-assertive">Login</button>
+          </div>
+          <div class="col-100 forgot-pw">
+            <span>Forgot Password?</span>
+            <span class="strong">Please Contact Support</span>
+            <span class="strong">1-800-333-2222</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,65 @@
+<ion-nav-view name="Messages">
+  <div id="top-arrow" ng-show="showTopArrow" ng-click="scrollTop()">
+    <i class="ion-arrow-up-c"></i>
+  </div>
+  <ion-content id="messages" on-scroll="getScrollPosition()">
+    <!-- Messages tab -->
+    <ion-tabs class="messages-alerts">
+      <ion-tab title="Messages">
+        <ion-nav-view id="message-tab" name="marketBuy">
+            <div class="list card">
+              <a class="item item-avatar message-item" ng-class="read_class(channel.unreadMessages)" ng-repeat="channel in channels track by $index" ng-click="viewChannel({url: channel.url, title: channel.title})">
+                <img class="icon" src="images/svg/messages/profile.svg" />
+                <span class="title">{{channel.title}}</span>
+                <span class="desc">
+                  {{channel.lastMessage}}
+                </span>
+                <i class="ion-ios-arrow-forward chevron"></i>
+              </a>
+            </div>
+        </ion-nav-view>
+      </ion-tab>
+      <!-- Alerts tab -->
+      <ion-tab title="Alerts">
+        <ion-nav-view id="alert-tab" name="marketSell">
+            <div class="list card">
+              <a class="item message-item" ng-class="read_class(alert.seen)" ng-repeat="alert in alerts track by $index" ng-click="viewAlert($index)">
+                <span class="title">{{alert.message}}</span>
+                <span class="desc">{{alert.created_at}}</span>
+                
+                <i class="ion-ios-arrow-forward chevron"></i>
+              </a>
+            </div>
+        </ion-nav-view>
+      </ion-tab>
+      
+      <!-- <ion-tab title="Alerts">
+        <ion-nav-view id="alert-tab" name="marketSell">
+            <div class="list card">
+              <a class="item message-item" ng-repeat="alert in alerts track by $index" ng-click="viewAlert($index)">
+                <span class="title">{{alert.title}}</span>
+                <span class="desc">{{alert.shortDescription | limitToWords:true:60 }}</span>
+                <div class="subinfo">
+                  <span class="category">{{alert.category}}</span><span class="user">{{alert.userId}}</span><span class="region">{{alert.region}}</span><span class="price">${{alert.price}}</span>
+                </div>
+                <div class="actions" ng-if="alert.status === 'not-complete'">
+                  <button class="user">{{alert.userId}}</button><button class="approve" ng-click="approveSell($index)">Approve</button><button class="deny">Deny</button>
+                </div>
+                <div class="actions" ng-if="alert.status === 'complete'">
+                  <button class="user">{{alert.userId}}</button><button class="waiting">Awaiting Confirmation</button>
+                </div>
+                <div class="actions" ng-if="alert.status === 'approval'">
+                  <button class="user">{{alert.userId}}</button><button class="waiting">Awaiting Approval</button>
+                </div>
+                <div class="actions" ng-if="alert.status === 'approved'">
+                  <button class="user">{{alert.userId}}</button><button class="approve" ng-click="approveBuy($index)">Approved</button>
+                </div>
+                <i class="ion-ios-arrow-forward chevron"></i>
+              </a>
+            </div>
+        </ion-nav-view>
+      </ion-tab>
+       -->
+    </ion-tabs>
+  </ion-content>
+</ion-nav-view>

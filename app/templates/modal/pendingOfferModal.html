@@ -1,0 +1,49 @@
+<ion-modal-view id="pendingoffer-modal">
+  <ion-header-bar class="modal-header">
+    <button class="modal-back" ng-click="modalCommand('hide')"><i class="ion-ios-arrow-back back"></i></button>
+    <h1 class="title">Pending Offer</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="wrapper">
+      <div class="list card">
+
+        <div class="actions" ng-if="!isBuyer">
+          <button class="offer-message" ng-click="goToConvo(alert.user_id)">{{opponent_identifier}}</button>
+          <span class="offer-desc">{{alert.message}}</span>
+          <button class="approve" ng-click="approveOffer('seller')" ng-if="offer.enable_owner" >Approve</button>
+          <button class="deny" ng-click="denyOffer()" ng-if="offer.enable_owner" >Deny</button>
+        </div>
+
+        <div class="actions" ng-if="isBuyer">
+          <button class="offer-message" ng-click="goToConvo(alert.user_id)">{{opponent_identifier}}</button>
+          <span class="offer-desc">{{alert.message}}</span>
+          <button class="approve" ng-click="approveOffer('buyer')" ng-if="offer.accepted && offer.confirmed == null" >Confirm</button>
+          <button class="deny" ng-click="denyOffer()" ng-if="offer.accepted &&  offer.confirmed == null" >Cancel</button>
+        </div>
+
+        <a class="item item-avatar market-item" 
+            ng-repeat="product in products track by $index" ng-click="goToItemDescription(product)">
+
+          <img class="icon" ng-src="images{{product.path}}-buy.svg" ng-if="isBuyer"/>
+          <img class="icon" ng-src="images{{product.path}}-sell.svg" ng-if="!isBuyer"/>
+
+          <span class="title">{{product.title}}</span>
+          <div class="subinfo">
+            <span class="transaction-id">{{product.user.identifier}}</span>
+            <span class="region">{{alert.created_at}}</span>
+          </div>
+          <span class="desc">{{product.details | limitToWords:true:60}}</span>
+          <div class="flags">
+            <div class="onsale" ng-if="product.flags.onsale">Onsale</div>
+            <div class="offerspending" ng-if="product.flags.offerspending">Offerspending</div>
+            <div class="finalday" ng-if="product.flags.price_negotiable">Price Negotiable</div>
+            <div class="urgent" ng-if="product.flags.expiring_soon">Expiring Soon</div>
+            <div class="discounted" ng-if="product.flags.discounted">Discounted</div>
+          </div>
+          <span class="price">${{product.price | number}}</span>
+        </a>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-modal-view>

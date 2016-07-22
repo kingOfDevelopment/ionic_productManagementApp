@@ -1,0 +1,64 @@
+<ion-nav-view name="ItemDescription">
+  <ion-content id="item-description">
+    <div id="listing-hero">
+      <img ng-src="images{{item.path}}.jpg" />
+    </div>
+    <div id="listing-details">
+      <div class="title">
+        <span>{{item.title}}</span>
+      </div>
+      <div class="subtitle row">
+        <div class="left col-50">
+          <span>${{item.price | number}} USD</span>
+        </div>
+        <div class="right col-50">
+          <span>ID #{{item.id}}</span>
+        </div>
+      </div>
+      <div class="purchase" ng-if="!item.mode">
+        <button ng-click="processListing(listingAction)" ng-class="{'buy': listingAction == 'Buy', 'sell': listingAction == 'Sell'}">{{listingAction}}</button>
+      </div>
+      <div class="purchase" ng-if="item.mode == 1">
+        <button class="approval" ng-click="verifyListing()">Confirm</button>
+        <button class="cancel">Cancel</button>
+      </div>
+
+      <div class="details">
+        <div class="top row">
+          <div class="left col-50">Quantity</div>
+          <div class="right col-50">Available</div>
+        </div>
+        <div class="bottom row">
+          <div class="left col-50">{{item.quantity | number}}</div>
+          <div class="right col-50">{{item.available_from}}</div>
+        </div>
+
+        <div class="top row">
+          <div class="left black1 col-50">Number of Seats</div>
+          <div class="right black2 col-50">Total Days</div>
+        </div>
+        <div class="bottom row">
+          <div class="left col-50">{{item.seats | number}}</div>
+          <div class="right col-50">{{item.days}}</div>
+        </div>
+      </div>
+    </div>
+    <ion-scroll class="filmstrip" direction="x" scrollbar-x="true">
+      <div class="inner row" scroller-resize>
+        <img ng-repeat="mainCategory in categories" ng-src="images{{mainCategory.path}}.png" />
+      </div>
+    </ion-scroll>
+    <div id="listing-overview">
+      <span class="title">Certification</span>
+      <div class="desc">
+        <pre>{{item.sku}}</pre>
+      </div>
+
+      <span class="title">Item Overview</span>
+      <div class="desc">
+        <pre>{{item.details}}</pre>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-nav-view>
